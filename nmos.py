@@ -1,5 +1,6 @@
 import math
 
+# variable setup
 significantFig = 8
 
 Cox = 1 / 1
@@ -40,23 +41,34 @@ else:
 VovN = Vgs - Vtn
 
 
-# Nmos calculations
-if Vb > Vs:
-    print("Improper Bias")
-
-elif Vgs < Vtn:
-    print("Cut-off mode")
+# Calculation functions
 
 
-elif Vds >= VovN:
-    print("Saturation Mode")
-    ids = 0.5 * Bn * math.pow(VovN, 2) * (1 + lambda_ * Vds)
-    print("Saturation current", round(ids, significantFig))
+def calculate_ids():
+    # Nmos Ids calculations
+    if Vb > Vs:
+        print("Improper Bias")
 
-elif Vds < VovN:
-    print("Triode Mode")
-    ids = Bn * ((VovN * Vds) - (0.5 * math.pow(Vds, 2)))
-    print("Triode current", round(ids, significantFig))
+    elif Vgs < Vtn:
+        print("Cut-off mode")
+
+
+    elif Vds >= VovN:
+        print("Saturation Mode")
+        ids = 0.5 * Bn * math.pow(VovN, 2) * (1 + lambda_ * Vds)
+        print("Saturation current", round(ids, significantFig))
+
+    elif Vds < VovN:
+        print("Triode Mode")
+        ids = Bn * ((VovN * Vds) - (0.5 * math.pow(Vds, 2)))
+        print("Triode current", round(ids, significantFig))
+
+
+# Calculation calls
+
+calculate_ids()
+
+
 
 # Pmos Node Voltages
 # Vsg = Vs - Vg
